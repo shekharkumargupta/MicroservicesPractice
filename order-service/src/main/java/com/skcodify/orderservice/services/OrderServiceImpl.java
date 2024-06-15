@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
             order.setUserName(faker.name().username());
             order.setProducts(new ArrayList<Product>());
             orders.put(order.getId(), order);
-            addProduct(order.getId(), (long) faker.number().numberBetween(1, 30));
+            //addProduct(order.getId(), (long) faker.number().numberBetween(1, 30));
         }
     }
 

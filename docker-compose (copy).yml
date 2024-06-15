@@ -4,8 +4,6 @@ services:
     image: shekharkumargupta/discovery-service
     ports:
       - 8761:8761
-    expose:
-      - 8761
     networks:
       - microservices-net
     restart: unless-stopped
@@ -16,16 +14,9 @@ services:
     image: shekharkumargupta/gateway-service
     ports:
       - 8222:8222
-    expose:
-      - 8222
     networks:
       - microservices-net
     restart: unless-stopped
-    links:
-      - discovery
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
-      SERVER_PORT: 8222
 
 
   products:
@@ -33,17 +24,9 @@ services:
     image: shekharkumargupta/product-service
     ports:
       - 8082:8082
-    expose: 
-      - 8082
     networks:
       - microservices-net
     restart: unless-stopped
-    links:
-      - discovery
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
-      SERVER_PORT: 8082
-
 
 
   orders:
@@ -51,17 +34,9 @@ services:
     image: shekharkumargupta/order-service
     ports:
       - 8081:8081
-    expose: 
-      - 8081
     networks:
       - microservices-net
     restart: unless-stopped
-    links:
-      - discovery
-      - products	
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
-      SERVER_PORT: 8081
 
 
 
