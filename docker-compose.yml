@@ -1,3 +1,4 @@
+version: '1.1'
 services:
   discovery:
     container_name: ms-discovery-service
@@ -57,8 +58,7 @@ services:
       - microservices-net
     restart: unless-stopped
     links:
-      - discovery
-      - products	
+      - discovery	
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
       SERVER_PORT: 8081

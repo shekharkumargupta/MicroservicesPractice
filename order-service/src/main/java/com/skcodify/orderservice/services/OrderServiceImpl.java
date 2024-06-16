@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.skcodify.orderservice.Order;
 import com.skcodify.orderservice.domain.Product;
 import com.skcodify.orderservice.feignclients.ProductClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService {
 
     private final Map<String, Order> orders;
-    private final ProductClient productClient;
+    @Autowired
+    private ProductClient productClient;
 
-    public OrderServiceImpl(ProductClient productClient){
-        this.productClient = productClient;
+    public OrderServiceImpl(){
         orders = new HashMap<>();
         Faker faker = new Faker();
         for (int i = 0; i < 3; i++) {
@@ -27,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
             order.setUserName(faker.name().username());
             order.setProducts(new ArrayList<Product>());
             orders.put(order.getId(), order);
-            //addProduct(order.getId(), (long) faker.number().numberBetween(1, 30));
+            addProduct(order.getId(), (long) faker.number().numberBetween(1, 30));
         }
     }
 
