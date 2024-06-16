@@ -8,12 +8,12 @@ spring:
     gateway:
       routes:
         - id: product-route
-          uri: http://ms-product-service:8082
+          uri: http://products:8082
           predicates:
             - Path=/products/**
 
         - id: order-route
-          uri: http://ms-order-service:8081
+          uri: http://orders:8081
           predicates:
             - Path=/orders/**
 
