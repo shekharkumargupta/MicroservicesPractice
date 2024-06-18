@@ -16,10 +16,11 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService {
 
     private final Map<String, Order> orders;
-    @Autowired
-    private ProductClient productClient;
 
-    public OrderServiceImpl(){
+    private final ProductClient productClient;	
+
+    public OrderServiceImpl(ProductClient productClient){
+	this.productClient = productClient;
         orders = new HashMap<>();
         Faker faker = new Faker();
         for (int i = 0; i < 3; i++) {

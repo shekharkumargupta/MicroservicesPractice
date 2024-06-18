@@ -10,26 +10,21 @@ spring:
     gateway:
       routes:
         - id: product-route
-          uri: http://products:8082
+          uri: http://localhost:8082
           predicates:
             - Path=/products/**
 
         - id: order-route
-          uri: http://orders:8081
+          uri: http://localhost:8081
           predicates:
             - Path=/orders/**
-
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8080/realms/ShekharRealms/
-#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
     register-with-eureka: true
+
+
 
 
