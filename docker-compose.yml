@@ -1,5 +1,29 @@
 version: '1.1'
 services:
+  keycloak:
+    container_name: keycloak
+    image: keycloak/keycloak
+    restart: always
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_EXTRA_ARGS="-Dkeycloak.profile.feature.upload_scripts=enabled"
+    ports:
+      - "8181:8080"
+    depends_on:
+      - keycloak-db
+    networks:
+      - microservices-net
+
+  keycloak-db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=password
+    networks:
+      - microservices-net
+
   discovery:
     container_name: ms-discovery-service
     image: shekharkumargupta/discovery-service
