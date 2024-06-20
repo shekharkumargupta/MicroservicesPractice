@@ -2,10 +2,15 @@ package com.skcodify.orderservice.services;
 
 import com.github.javafaker.Faker;
 import com.skcodify.orderservice.Order;
+import com.skcodify.orderservice.config.AppProperties;
 import com.skcodify.orderservice.domain.Product;
-import com.skcodify.orderservice.feignclients.ProductClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,15 +18,16 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final Map<String, Order> orders;
+    private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+    private final Map<String, Order> orders = new HashMap<>();
+    private final AppProperties appProperties;
+    private final RestTemplate restTemplate;
 
-    private final ProductClient productClient;	
-
-    public OrderServiceImpl(ProductClient productClient){
-	this.productClient = productClient;
-        orders = new HashMap<>();
+    @PostConstruct
+    public void init() {
         Faker faker = new Faker();
         for (int i = 0; i < 3; i++) {
             Order order = new Order();
@@ -35,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
+        log.info("ProductServiceUrl: " + appProperties.getProductsUrl());
         return orders.values().stream().toList();
     }
 
@@ -57,8 +64,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addProduct(String id, Long productId) {
-        Product product = productClient.getProduct(productId);
-        orders.get(id).getProducts().add(product);
+        log.info("productServiceUrl: " + appProperties.getProductsUrl());
+        String url = appProperties.getProductsUrl() + "/" + productId;
+        ResponseEntity<Product> entity = restTemplate.getForEntity(url, Product.class);
+        orders.get(id).getProducts().add(entity.getBody());
         return orders.get(id);
     }
 }

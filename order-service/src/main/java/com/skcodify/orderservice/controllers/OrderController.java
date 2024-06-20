@@ -23,11 +23,6 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findAll());
     }
 
-    @GetMapping("/ping")
-    public String ping(){
-        return "Version 0.0.1";
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Order> findById(@PathVariable String id){
         return ResponseEntity.ok(orderService.findById(id));
