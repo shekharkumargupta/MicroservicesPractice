@@ -4,11 +4,10 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/order-service/pom.xml" />
         <option value="$PROJECT_DIR$/product-service/pom.xml" />
-        <option value="$PROJECT_DIR$/../SpringPractice/services/discovery/pom.xml" />
-        <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
+        <option value="$PROJECT_DIR$/order-service/pom.xml" />
         <option value="$PROJECT_DIR$/gateway-service/pom.xml" />
+        <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
       </list>
     </option>
   </component>
