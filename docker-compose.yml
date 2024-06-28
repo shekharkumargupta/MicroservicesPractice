@@ -46,7 +46,6 @@ services:
       SERVER_PORT: 8082
 
 
-
   orders:
     container_name: ms-order-service
     image: shekharkumargupta/order-service
@@ -62,6 +61,24 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
       SERVER_PORT: 8081
+
+
+  customers:
+    container_name: ms-customer-service
+    image: shekharkumargupta/customer-service
+    ports:
+      - 8083:8083
+    expose:
+      - 8083
+    networks:
+      - microservices-net
+    restart: unless-stopped
+    depends_on:
+      - products
+      - orders
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+      SERVER_PORT: 8083
 
 
 

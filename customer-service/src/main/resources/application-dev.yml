@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: customer-service
+
+eureka:
+  client:
+    enabled: false
