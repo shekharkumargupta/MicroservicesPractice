@@ -7,9 +7,9 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery:8761/eureka
 
 
 
 service:
-  products-url: http://ms-product-service:8082/products
+  products-url: http://gateway:8222/products

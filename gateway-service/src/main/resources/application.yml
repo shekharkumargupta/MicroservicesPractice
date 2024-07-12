@@ -18,6 +18,12 @@ spring:
           uri: http://orders:8081
           predicates:
             - Path=/orders/**
+            
+        - id: customer-route
+          uri: http://customers:8083
+          predicates:
+            - Path=/customers/**
+
 
 eureka:
   client:
