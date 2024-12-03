@@ -2,13 +2,16 @@ package com.skcodify.services;
 
 import com.github.javafaker.Faker;
 import com.skcodify.domain.Product;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Service
+@Qualifier("productService")
 public class ProductServiceImpl implements ProductService{
 
     private final Map<Long, Product> products;
@@ -19,12 +22,10 @@ public class ProductServiceImpl implements ProductService{
         for (int i = 0; i < 30; i++) {
             Product product = new Product();
             product.setId((long)i + 1);
-            product.setName(faker.book().title());
-            product.setAuthor(faker.book().author());
+            product.setTitle(faker.book().title());
             product.setCategory(faker.book().genre());
-            product.setPrice(String.valueOf(
-                    faker.number().randomDouble(2, 30, 300))
-            );
+            product.setPrice(
+                    (float) faker.number().randomDouble(2, 30, 300));
             products.put(product.getId(), product);
         }
     }
@@ -46,8 +47,10 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> findAll() {
-        return products.values().stream().toList();
+    public CompletableFuture<List<Product>> findAll() {
+        return CompletableFuture.supplyAsync(() -> {
+            return products.values().stream().toList();
+        });
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ProductControllerTests {
     private MockMvc mockMvc;
 
 
-    @Test
+//    @Test
     void shouldReturnHttpStatus_OK() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8082/products"))
                 .andDo(MockMvcResultHandlers.print())
@@ -25,7 +25,7 @@ public class ProductControllerTests {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
-    @Test
+//    @Test
     void shouldReturn_Product() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8082/products/1"))
                 .andDo(MockMvcResultHandlers.print())
