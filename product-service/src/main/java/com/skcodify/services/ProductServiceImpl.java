@@ -43,7 +43,11 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product findById(Long id) {
-        return products.getOrDefault(id, new Product());
+        return products.values()
+                .stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElse(new Product());
     }
 
     @Override

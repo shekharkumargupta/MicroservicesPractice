@@ -49,6 +49,11 @@ public class ProductAsyncServiceImpl implements ProductService{
         return completableFuture.thenComposeAsync(this::transformToProductList);
     }
 
+    @Override
+    public List<Product> findByCategory(String category) {
+        return List.of();
+    }
+
     private CompletableFuture<String> fetchProductResponse(){
         return CompletableFuture.supplyAsync(() -> {
             log.info("Thread name: " + Thread.currentThread().getName());
@@ -80,17 +85,4 @@ public class ProductAsyncServiceImpl implements ProductService{
     }
 
 
-    @Override
-    public List<Product> findByCategory(String category) {
-        return List.of();
-    }
-
-
-    @GetMapping("/ext/async")
-    public ResponseEntity<String> findExternalProductsAsync(){
-        FutureTask<ResponseEntity<String>> futureTask = new FutureTask<>(() -> {
-            return restTemplate.getForEntity(EXT_PRODUCTS_URL, String.class);
-        });
-        return ResponseEntity.ok("");
-    }
 }

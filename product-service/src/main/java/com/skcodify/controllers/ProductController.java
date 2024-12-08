@@ -2,6 +2,7 @@ package com.skcodify.controllers;
 
 import com.skcodify.domain.Product;
 import com.skcodify.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +16,14 @@ import java.util.concurrent.CompletableFuture;
 public class ProductController {
 
 
-    private final ProductService productService;
+    @Qualifier("productService")
+    @Autowired
+    private ProductService productService;
 
-    public ProductController(@Qualifier("productAsyncService") ProductService productService) {
-        this.productService = productService;
-    }
+
+//    public ProductController(ProductService productService) {
+//        this.productService = productService;
+//    }
 
     @GetMapping
     public CompletableFuture<ResponseEntity<List<Product>>> findAll(){
