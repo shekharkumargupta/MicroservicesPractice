@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-deploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: products
+  revisionHistoryLimit: 2
+  progressDeadlineSeconds: 300
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+      - name: products-pod
+        image: shekharkumargupta/product-service:latest
+        ports:
+          - containerPort: 8082
+
+        
