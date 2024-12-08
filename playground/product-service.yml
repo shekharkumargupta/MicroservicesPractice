@@ -20,5 +20,9 @@ spec:
         image: shekharkumargupta/product-service:latest
         ports:
           - containerPort: 8082
+  	env:
+  	- name: spring.profiles.active
+  	value: dev
+          
 
         
