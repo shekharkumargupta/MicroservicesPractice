@@ -16,7 +16,7 @@ spec:
         app: products
     spec:
       containers:
-      - name: products-pod
+      - name: products-ctr
         image: shekharkumargupta/product-service:latest
         env:
         - name: SPRING_PROFILES_ACTIVE
