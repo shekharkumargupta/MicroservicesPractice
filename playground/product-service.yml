@@ -19,7 +19,7 @@ spec:
       - name: products-pod
         image: shekharkumargupta/product-service:latest
         env:
-        - name: spring.profiles.active
+        - name: SPRING_PROFILES_ACTIVE
           value: dev
         ports:
           - containerPort: 8082
