@@ -7,6 +7,14 @@ spec:
   selector:
     matchLabels:
       app: products
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 300
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -14,7 +22,7 @@ spec:
     spec:
       containers:
       - name: products-ctr
-        image: shekharkumargupta/product-service:latest
+        image: shekharkumargupta/product-service:v1
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: dev
