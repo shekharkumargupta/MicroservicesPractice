@@ -7,6 +7,14 @@ spec:
   selector:
     matchLabels:
       app: products
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
