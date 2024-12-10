@@ -9,6 +9,14 @@ spec:
   selector:
     matchLabels:
       app: products
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 300
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -16,7 +24,7 @@ spec:
     spec:
       containers:
       - name: products
-        image: shekharkumargupta/product-service
+        image: shekharkumargupta/product-service:latest
         ports:
           - containerPort: 8082
 
