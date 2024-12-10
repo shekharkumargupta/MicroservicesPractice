@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: products
-  revisionHistoryLimit:5
+  revisionHistoryLimit: 5
   progressDeadlineSeconds: 300
   minReadySeconds: 10
   strategy:
