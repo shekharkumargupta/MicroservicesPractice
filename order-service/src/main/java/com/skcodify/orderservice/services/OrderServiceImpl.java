@@ -26,19 +26,6 @@ public class OrderServiceImpl implements OrderService {
     private final AppProperties appProperties;
     private final RestTemplate restTemplate;
 
-    @PostConstruct
-    public void init() {
-        Faker faker = new Faker();
-        for (int i = 0; i < 3; i++) {
-            Order order = new Order();
-            order.setId(faker.idNumber().valid());
-            order.setUserName(faker.name().username());
-            order.setProducts(new ArrayList<Product>());
-            orders.put(order.getId(), order);
-            addProduct(order.getId(), (long) faker.number().numberBetween(1, 30));
-        }
-    }
-
     @Override
     public List<Order> findAll() {
         log.info("ProductServiceUrl: " + appProperties.getProductsUrl());
@@ -67,6 +54,7 @@ public class OrderServiceImpl implements OrderService {
         log.info("productServiceUrl: " + appProperties.getProductsUrl());
         String url = appProperties.getProductsUrl() + "/" + productId;
         ResponseEntity<Product> entity = restTemplate.getForEntity(url, Product.class);
+        System.out.println("Product: " + entity.getBody());
         orders.get(id).getProducts().add(entity.getBody());
         return orders.get(id);
     }

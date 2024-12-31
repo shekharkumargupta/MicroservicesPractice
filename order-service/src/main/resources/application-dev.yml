@@ -1,8 +1,17 @@
-service:
-  products-url: http://localhost:8082/products
+server:
+  port: 8081
+
+springdoc:
+  api-docs:
+    path: /swagger
+  swagger-ui:
+    path: /swagger.html
 
 
 spring:
-  cloud:
-    discovery:
-      enabled: false
+  application:
+    name: order-service
+
+
+service:
+  products-url: http://localhost:8082/products

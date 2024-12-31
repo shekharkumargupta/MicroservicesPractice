@@ -3,6 +3,7 @@ package com.skcodify.orderservice;
 import com.skcodify.orderservice.domain.Product;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -10,7 +11,7 @@ public class Order {
 
     private String id;
     private String userName;
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
 
     @Override

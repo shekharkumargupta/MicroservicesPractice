@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public class ProductController {
 
 
-    @Qualifier("productService")
+    @Qualifier("productAsyncService")
     @Autowired
     private ProductService productService;
 

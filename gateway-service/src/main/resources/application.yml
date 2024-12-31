@@ -24,16 +24,17 @@ spring:
           predicates:
             - Path=/customers/**
 
-  security:
-    user:
-      password: admin
+#  security:
+#    user:
+#      name: admin
+#      password: admin
 
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://discovery:8761/eureka
-    register-with-eureka: true
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka
+#    register-with-eureka: true
 
 
 

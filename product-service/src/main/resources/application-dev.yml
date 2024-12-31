@@ -1,6 +1,12 @@
 server:
   port: 8082
 
+springdoc:
+  api-docs:
+    path: /swagger
+  swagger-ui:
+    path: /swagger.html
+
 spring:
   application:
     name: product-service
