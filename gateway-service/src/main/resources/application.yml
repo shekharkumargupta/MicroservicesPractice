@@ -1,6 +1,10 @@
 server:
   port: 8222
 
+jwt:
+  secret: ZDOAhj93i3I9mpNWIkOWRewrgchfgwrx
+  expiration: 10
+
 spring:
   application:
     name: gateway-service
@@ -10,17 +14,17 @@ spring:
     gateway:
       routes:
         - id: product-route
-          uri: http://products:8082
+          uri: http://localhost:8082
           predicates:
             - Path=/products/**
 
         - id: order-route
-          uri: http://orders:8081
+          uri: http://localhost:8081
           predicates:
             - Path=/orders/**
             
         - id: customer-route
-          uri: http://customers:8083
+          uri: http://localhost:8083
           predicates:
             - Path=/customers/**
 
@@ -30,11 +34,11 @@ spring:
 #      password: admin
 
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://discovery:8761/eureka
-#    register-with-eureka: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
 
 
 
