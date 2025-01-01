@@ -2,10 +2,10 @@ server:
   port: 8222
 
 spring:
-  application:
-    name: gateway-service
   main:
     allow-bean-definition-overriding: true
+  application:
+    name: gateway-service
   cloud:
     gateway:
       routes:
