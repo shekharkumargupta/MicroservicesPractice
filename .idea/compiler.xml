@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="product-service" />
+        <module name="auth-service" />
         <module name="order-service" />
         <module name="customer-service" />
         <module name="discovery-service" />
@@ -16,12 +17,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="discovery" target="17" />
+      <module name="security-learning" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auth-service" options="-parameters" />
       <module name="customer-service" options="-parameters" />
-      <module name="discovery" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
