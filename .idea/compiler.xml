@@ -8,11 +8,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="product-service" />
-        <module name="auth-service" />
         <module name="order-service" />
         <module name="customer-service" />
         <module name="discovery-service" />
         <module name="gateway-service" />
+      </profile>
+      <profile name="Annotation profile for auth-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="auth-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

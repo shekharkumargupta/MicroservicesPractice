@@ -7,6 +7,11 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: auth-route
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/auth/**
+
         - id: product-route
           uri: http://localhost:8082/
           predicates:
