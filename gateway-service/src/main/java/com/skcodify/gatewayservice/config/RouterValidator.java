@@ -17,15 +17,4 @@ public class RouterValidator {
             request -> openEndpoints.stream()
                     .noneMatch(uri -> request.getURI().getPath().contains(uri));
 
-//    public boolean isSecured(ServerHttpRequest request){
-//        String uriPath = request.getURI().getPath();
-//        System.out.println("Request path: " + uriPath);
-//        for (String uri : openEndpoints){
-//            if(uriPath.contains(uri)){
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
 }
