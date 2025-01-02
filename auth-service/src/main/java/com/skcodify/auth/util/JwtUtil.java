@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
-@Slf4j
 @Component
 public class JwtUtil {
+
+    private static final Logger log = Logger.getLogger(JwtUtil.class.getName());
 
     @Value("${jwt.secret}")
     private String secretKey;
