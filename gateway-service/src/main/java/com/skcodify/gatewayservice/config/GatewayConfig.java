@@ -19,12 +19,12 @@ public class GatewayConfig {
         return builder.routes()
                 .route("product-service", r -> r.path("/products/**")
                         .filters(f -> f.filter(filter))
-                        //.uri("lb://product-service"))
-                        .uri("http://localhost:8082"))
+                        .uri("lb://product-service"))
+                        //.uri("http://localhost:8082"))
                 .route("auth-service", r -> r.path("/auth/**")
                         .filters(f -> f.filter(filter))
-                        //.uri("lb://auth-service"))
-                        .uri("http://localhost:8080"))
+                        .uri("lb://auth-service"))
+                        //.uri("http://localhost:8080"))
                 .build();
     }
 }
