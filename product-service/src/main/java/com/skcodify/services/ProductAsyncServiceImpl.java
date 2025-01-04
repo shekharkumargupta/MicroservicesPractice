@@ -40,7 +40,10 @@ public class ProductAsyncServiceImpl implements ProductService{
 
     @Override
     public Product findById(Long id) {
-        return null;
+        ResponseEntity<Product> forEntity =
+                restTemplate.getForEntity(EXT_PRODUCTS_URL + "/" + id, Product.class);
+        Product product = forEntity.getBody();
+        return product;
     }
 
     @Override

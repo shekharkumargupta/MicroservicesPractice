@@ -4,12 +4,14 @@ spring:
 
 server:
   port: 8081
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://discovery:8761/eureka
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 
 
 service:
-  products-url: http://gateway:8222/products
+  gateway-url: http://localhost:8222
+  product-url: PRODUCT-SERVICE/products

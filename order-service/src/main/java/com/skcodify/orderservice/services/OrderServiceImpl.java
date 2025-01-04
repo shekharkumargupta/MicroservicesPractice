@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import com.skcodify.orderservice.Order;
 import com.skcodify.orderservice.config.AppProperties;
 import com.skcodify.orderservice.domain.Product;
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
-        log.info("ProductServiceUrl: " + appProperties.getProductsUrl());
+        log.info("Orders >> findAll");
         return orders.values().stream().toList();
     }
 
@@ -51,10 +49,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addProduct(String id, Long productId) {
-        log.info("productServiceUrl: " + appProperties.getProductsUrl());
-        String url = appProperties.getProductsUrl() + "/" + productId;
+        log.info("gatewayServiceUrl: " + appProperties.getGatewayUrl());
+        log.info("productServiceUrl: " + appProperties.getProductUrl());
+        String url = appProperties.getGatewayUrl()
+                + "/" + appProperties.getProductUrl()
+                + "/" + productId;
         ResponseEntity<Product> entity = restTemplate.getForEntity(url, Product.class);
-        System.out.println("Product: " + entity.getBody());
+        log.info("Product: " + entity.getBody());
         orders.get(id).getProducts().add(entity.getBody());
         return orders.get(id);
     }

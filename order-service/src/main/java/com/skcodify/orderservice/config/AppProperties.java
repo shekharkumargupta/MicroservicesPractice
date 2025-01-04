@@ -7,7 +7,8 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "service")
 
 @Data
-public class AppProperties {    
-    private String productsUrl;
+public class AppProperties {
+    private String gatewayUrl;
+    private String productUrl;
     
 }
