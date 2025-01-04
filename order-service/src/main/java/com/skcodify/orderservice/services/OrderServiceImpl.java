@@ -4,9 +4,14 @@ import com.github.javafaker.Faker;
 import com.skcodify.orderservice.Order;
 import com.skcodify.orderservice.config.AppProperties;
 import com.skcodify.orderservice.domain.Product;
+import com.skcodify.orderservice.dto.OrderRequest;
+import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -48,15 +53,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addProduct(String id, Long productId) {
+    public Order addProduct(OrderRequest orderRequest, Long productId) {
         log.info("gatewayServiceUrl: " + appProperties.getGatewayUrl());
         log.info("productServiceUrl: " + appProperties.getProductUrl());
         String url = appProperties.getGatewayUrl()
                 + "/" + appProperties.getProductUrl()
                 + "/" + productId;
-        ResponseEntity<Product> entity = restTemplate.getForEntity(url, Product.class);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", orderRequest.getToken());
+
+        HttpEntity httpEntity = new HttpEntity(headers);
+
+        ResponseEntity<Product> entity = restTemplate.exchange(url, HttpMethod.GET, httpEntity, Product.class);
         log.info("Product: " + entity.getBody());
-        orders.get(id).getProducts().add(entity.getBody());
-        return orders.get(id);
+        orders.get(orderRequest.getOrder().getId()).getProducts().add(entity.getBody());
+        return orders.get(orderRequest.getOrder().getId());
     }
 }

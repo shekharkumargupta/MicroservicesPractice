@@ -1,7 +1,9 @@
 package com.skcodify.orderservice.controllers;
 
 import com.skcodify.orderservice.Order;
+import com.skcodify.orderservice.dto.OrderRequest;
 import com.skcodify.orderservice.services.OrderService;
+import org.jboss.logging.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
+    private Logger log = Logger.getLogger(OrderController.class.getName());
 
     private final OrderService orderService;
 
@@ -30,8 +33,14 @@ public class OrderController {
 
     @GetMapping("/{id}/{productId}")
     public ResponseEntity<Order> addProduct(@PathVariable String id,
-                                            @PathVariable Long productId){
-        Order order = orderService.addProduct(id, productId);
+                                            @PathVariable Long productId,
+                                            @RequestHeader("Authorization") String authorization){
+        log.info("addProduct: " + authorization);
+        OrderRequest orderRequest = new OrderRequest();
+        orderRequest.setOrder(new Order());
+        orderRequest.getOrder().setId(id);
+        orderRequest.setToken(authorization);
+        Order order = orderService.addProduct(orderRequest, productId);
         return ResponseEntity.ok(order);
     }
 

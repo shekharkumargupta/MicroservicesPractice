@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
+    private Logger log = Logger.getLogger(ProductController.class.getName());
 
     @Qualifier("productAsyncService")
     @Autowired
@@ -35,7 +37,9 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id){
+    public ResponseEntity<Product> findById(@PathVariable Long id,
+                                            @RequestHeader("Authorization") String authorization){
+        log.info("findById: " + authorization);
         return ResponseEntity.ok(productService.findById(id));
     }
 
