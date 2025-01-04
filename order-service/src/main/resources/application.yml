@@ -13,5 +13,5 @@ eureka:
 
 
 service:
-  gateway-url: http://localhost:8222
-  product-url: PRODUCT-SERVICE/products
+  gateway-url: http://localhost:8222/GATEWAY-SERVICE
+  product-url: products
