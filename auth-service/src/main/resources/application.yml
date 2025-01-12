@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8001
 
 spring:
   application:
@@ -9,7 +9,14 @@ jwt:
   secret: ZDOAhj93i3I9mpNWIkOWRewrgchfgwrx
   expiration: 10
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/
+
+keycloak:
+  realm: skcodify
+  auth-server-url: http://localhost:8222/GATEWAY-SERVICE/auth
+  resource: skcodify-ecomm-kc
+  public-client: true
+  bearer-only: true

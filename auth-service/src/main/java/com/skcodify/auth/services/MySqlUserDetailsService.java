@@ -17,13 +17,14 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class MySqlUserDetailsService implements UserDetailsService {
 
-    private static final Logger log = Logger.getLogger(CustomUserDetailsService.class);
+    private static final Logger log = Logger.getLogger(MySqlUserDetailsService.class);
+
     private static Map<String, AppUser> users;
 
-    public CustomUserDetailsService() {
-        log.info("Initializing CustomUserDetailsService...");
+    public MySqlUserDetailsService() {
+        log.info("Initializing MySqlUserDetailsService...");
         users = new HashMap<>();
         AppUser appUser = new AppUser();
         appUser.setUsername("user");
