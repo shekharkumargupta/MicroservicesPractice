@@ -29,6 +29,7 @@ public class ProductController {
 
     @GetMapping
     public CompletableFuture<ResponseEntity<List<Product>>> findAll(){
+
         CompletableFuture<List<Product>> completableFuture = productService.findAll();
         return completableFuture.thenApplyAsync(ResponseEntity::ok)
                 .exceptionally(throwable -> {
@@ -37,15 +38,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id,
-                                            @RequestHeader("Authorization") String authorization){
-        log.info("findById: " + authorization);
+    public ResponseEntity<Product> findById(@PathVariable Long id){
         return ResponseEntity.ok(productService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Product> save(@RequestBody Product product){
-        Product product1 = productService.createProduct(product);
+        Product product1= productService.createProduct(product);
         return ResponseEntity.ok(product1);
     }
 }

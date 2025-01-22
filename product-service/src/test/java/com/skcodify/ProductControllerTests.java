@@ -1,35 +1,27 @@
 package com.skcodify;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@Slf4j
 @SpringBootTest
-@AutoConfigureMockMvc
 public class ProductControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
 
+    @Value("${spring.application.name}")
+    private String applicationName;
 
-//    @Test
-    void shouldReturnHttpStatus_OK() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8082/products"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+    @Test
+    void contextLoads(){
+        log.info("ApplicationName: " + applicationName);
     }
 
-//    @Test
-    void shouldReturn_Product() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8082/products/1"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
-
+    @Test
+    void testApplicationName(){
+        assert ("product-service".equalsIgnoreCase(applicationName));
     }
+
 }

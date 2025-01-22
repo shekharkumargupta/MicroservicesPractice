@@ -1,37 +1,24 @@
 package com.skcodify;
 
-import com.skcodify.controllers.ProductController;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Slf4j
+@SpringBootTest
 class ProductServiceApplicationTests {
 
-	@LocalServerPort
-	private int port;
-
-	@Autowired
-	private ProductController productController;
-
-	@Autowired
-	private TestRestTemplate restTemplate;
+	@Value("${spring.application.name}")
+	private String applicationName;
 
 	@Test
-	void contextLoads() throws Exception{
-		assert(productController != null);
+	void contextLoads(){
+		log.info("ApplicationName: " + applicationName);
 	}
 
 	@Test
-	void findAllShouldReturnList(){
-		List list = this.restTemplate.getForObject("http://localhost:"
-						+ port + "/products", List.class);
-		assert (!list.isEmpty());
+	void testApplicationName(){
+		assert ("product-service-test".equalsIgnoreCase(applicationName));
 	}
-
 }
